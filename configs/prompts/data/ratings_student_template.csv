@@ -1,0 +1,6 @@
+image_id,prompt_id,sampler,seed,rater_id,surprise,inspirational_value,usability,aesthetic_quality,clarity_artifact
+img_0001,p001,Euler a,42,r01,5,4,3,3,2
+img_0002,p001,DPM++ 2M Karras,42,r01,4,5,4,4,4
+img_0003,p001,LMS,42,r01,3,3,4,4,4
+img_0004,p001,Heun,42,r01,3,3,4,4,4
+img_0005,p001,DDIM,42,r01,2,3,5,5,5
