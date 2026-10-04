@@ -1,0 +1,63 @@
+models:
+  sdxl:
+    id: stabilityai/stable-diffusion-xl-base-1.0
+    resolution: 1024
+    variant: fp16
+  sd15:
+    id: stable-diffusion-v1-5/stable-diffusion-v1-5
+    resolution: 512
+  sd35:
+    id: stabilityai/stable-diffusion-3.5-medium
+    resolution: 1024
+
+samplers:
+  - Euler a
+  - DPM++ 2M Karras
+  - LMS
+  - Heun
+  - DDIM
+
+main:
+  model: sdxl
+  prompts: prompts/prompts_150.txt
+  seeds: [42, 43, 44]
+  main_seed: 42
+  cfg: 7.5
+  steps: 30
+  negative_prompt: "low quality, blurry, distorted, ugly, bad anatomy"
+  output: outputs/main
+
+ablation:
+  model: sdxl
+  prompts: prompts/prompts_150.txt
+  seed: 42
+  cfg: 7.5
+  steps: 30
+  negative_prompt: "low quality, blurry, distorted, ugly, bad anatomy"
+  output: outputs/ablation
+  levels:
+    L0: Euler a
+    L1: Euler a_noise_0.5
+    L2: Euler deterministic
+    L3: DDIM
+    L4: pure_noise
+
+robustness:
+  sd35_prompts: 50
+  sd35_seeds: [42, 43, 44]
+  sd35_cfg: 7.5
+  sd35_steps: 30
+  cfg_values: [3.0, 7.5, 15.0]
+  step_values: [20, 30, 50]
+  negative_prompt: "low quality, blurry, distorted, ugly, bad anatomy"
+  output: outputs/robustness
+
+low_vram:
+  enabled: auto           # auto | true | false
+  min_resolution: 512
+  mid_resolution: 768
+  full_resolution: 1024
+  vram_thresholds_gb:
+    full: 16
+    mid: 12
+    low: 8
